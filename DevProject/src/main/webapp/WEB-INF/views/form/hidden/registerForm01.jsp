@@ -9,16 +9,20 @@
 <body>
 	<h2>Spring Form</h2>
 	<p></p>
-	<form:form modelAttribute="member" method="post" action="/formtag/selectbox/result">
+	<form:form modelAttribute="member" method="post" action="/formtag/hidden/result">
+		<form:hidden path="userId"/>
 		<table>
 			<tr>
-				<td>국적</td>
+				<td>이름</td>
 				<td>
-					<form:select path="nationality" items="${map}" multiple="true" />
+					<form:input path="userName"/>
+					<font color="red">
+						<form:errors path="userName"></form:errors>
+					</font>
 				</td>
 			</tr>
 		</table>
 		<form:button name="register">등록</form:button>
-	</form:form>	
+	</form:form>
 </body>
 </html>
