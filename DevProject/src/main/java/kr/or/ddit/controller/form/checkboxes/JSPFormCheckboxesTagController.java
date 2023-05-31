@@ -1,12 +1,15 @@
 package kr.or.ddit.controller.form.checkboxes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.ddit.vo.CodeLabelValue;
 import kr.or.ddit.vo.Member;
 
 @Controller
@@ -29,5 +32,16 @@ public class JSPFormCheckboxesTagController {
 		model.addAttribute("hobbyMap", map);
 		model.addAttribute(new Member());
 		return "form/checkboxes/registerForm01";
+	}
+	
+	@RequestMapping(value="/registerForm02")
+	public String registerForm02(Model model) {
+		List<CodeLabelValue> hobbyCodeList = new ArrayList<>();
+		hobbyCodeList.add(new CodeLabelValue("01", "Sports"));
+		hobbyCodeList.add(new CodeLabelValue("02", "Movie"));
+		hobbyCodeList.add(new CodeLabelValue("03", "Music"));
+		model.addAttribute("hobbyCodeList", hobbyCodeList);
+		model.addAttribute("member", new Member());
+		return "form/checkboxes/registerForm02";
 	}
 }
