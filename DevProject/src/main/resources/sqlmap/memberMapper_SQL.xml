@@ -20,25 +20,6 @@
 		<result property="auth" column="auth" />
 	</resultMap>
 
-	<!-- <insert id="create" parameterType="memberVO" useGeneratedKeys="true">
-		<selectKey keyProperty="userNo" resultType="int" order="BEFORE">
-			select seq_member.nextval from dual
-		</selectKey>
-		insert into member(
-			user_no, user_id, user_pw, user_name, reg_date, upd_date
-		) values (
-			#{userNo}, #{userId}, #{userPw}, #{userName}, sysdate, sysdate 
-		)
-	</insert>
-	
-	<insert id="createAuth" parameterType="memberAuth">
-		insert into member_auth (
-			user_no, auth
-		) values (
-			#{userNo}, #{auth}
-		)
-	</insert> -->
-	
 	<!-- <insert id="create" parameterType="memberVO">
 		insert all 
 		into member(
