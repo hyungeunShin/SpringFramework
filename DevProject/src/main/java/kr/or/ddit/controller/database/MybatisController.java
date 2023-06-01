@@ -90,5 +90,100 @@ public class MybatisController {
 	 * 		- 게시판 검색 기능 서비스 클래스 메소드 추가
 	 * 		- 게시판 검색 기능 Mapper 메소드 추가
 	 * 		- 게시판 검색 기능 Mapper xml 쿼리 추가
+	 * 
+	 * 3. 별칭 적용
+	 * - TypeAlias로 매핑 파일에서 반복적으로 사용될 패키지의 이름을 정의한다
+	 * 	
+	 * 	1) 마이바티스 설정
+	 * 		1) mybatisAlias.xml 설정
+	 * 		- typeAlias 설정을 한다
+	 * 		2) boardMapper_SQL.xml의 type 설정을 별칭으로 설정
+	 * 		- mybatisAlias가 설정되어 있지 않는 경우에는 타입으로 설정하고자 하는 타입 형태를 패키지명이 포함되어 있는 구조로 설정
+	 * 		- 쿼리 태그에 각각 세팅한 패키지명 대신 alias로 설정할 별칭으로 대체
+	 * 
+	 * 4. '_'로 구분된 컬럼명 자동 매핑
+	 * - 마이바티스 설정의 mapUnderscoreToCamelCase 프로퍼티 값을 true로 지정하면 '_'로 구분된 컬럼명을 소문자 낙타표기법의 프로퍼티명으로 자동 매핑할 수 있다
+	 * ex) bo_no가 boNo가 된다
+	 * 
+	 * 	1) 마이바티스 설정
+	 * 		1) mybatisAlias.xml 설정
+	 * 		<settings>
+	 * 			<setting name="mapUnderscoreToCamelCase" value="true" />
+	 * 		</settings>
+	 * 
+	 * 5. 기본키 취득
+	 * - 마이바티스는 useGeneratedKeys 속성을 이용하여 insert 할 때 데이터 베이스 측에서 채번된 기본키를 취득할 수 있다
+	 * 
+	 * 	1) 마이바티스 설정
+	 * 		1) 매핑 파일 수정(boardMapper_SQL.xml)
+	 * 		- create 부분 속성 추가
+	 * 			> useGeneratedKeys = "true"  keyProperty = boardNo
+	 * 			<selectKey order="BEFORE" resultType="int" keyProperty="boardNo">
+	 * 				select seq_board.nextval from dual
+	 * 			<selectKey>
+	 * 		
+	 * 		insert 쿼리가 실행되기 전 selectKey 태그 내에 있는 쿼리가 먼저 실행되어 최신의 boardNo를 생성하고
+	 * 		생성된 boardNo를 sql 쿼리가 담겨있는 insert 태그까지 넘어올때 넘겨주고 있는 파라미터(board)의 property인 boardNo에 세팅된다
+	 * 		세팅된 boardNo를 아래 insert 시 등록 값으로 사용하고 board라는 자바빈즈 객체에 담겨 최종 컨트롤러 까지 넘오간다
+	 * 
+	 * 		** seq_board.nextval 대신 현재 번호를 가져오기 위해 currval을 사용하는 경우가 있는데
+	 * 		이때 주의 사항이 있다
+	 * 
+	 * 		- select seq_board.currval from dual
+	 * 		> 위 쿼리를 사용시 currval를 사용하는데 있어서 사용 불가능할 때가 있는데 
+	 * 		currval은 select seq_board.nextval from dual 이 먼저 실행된 후 사용해야 한다.
+	 * 		> 같은 세션 내에서의 실행이 이뤄지지 않기 때문에 currval로 데이터를 가져오는데 에러가 발생한다
+	 * 
+	 * 		그럼에도 가져오고 싶다면
+	 * 		> select last_number from user_sequences where sequence_name = '시퀀스 명';
+	 * 		으로 가능하지만 권장 하지는 않는다
+	 * 
+	 * 6. 동적 SQL
+	 * - 마이바티스는 동적 SQL을 조립하는 구조를 지원하고 있으며, SQL 조립 규칙을 매핑 파일에 정의 할 수 있다
+	 * 
+	 * 	1) 동적으로 SQL을 조립하기 위한 SQL 요소
+	 * 	- <where>
+	 * 	> where 절 앞 뒤에 내용을 더 추가하거나 삭제할 때 사용하는 요소
+	 * 
+	 * 	- <if>
+	 * 	> 조건을 만족할때만 SQL을 조립할 수 있게 만드는 요소
+	 * 
+	 * 	- <choose>
+	 * 	> 여러 선택 항목에서 조건에 만족할 때만 SQL을 조립할 수 있게 만드는 요소
+	 * 
+	 * 	- <foreach>
+	 * 	> 컬렉션이나 배열에 대해 반복처리를 하기 위한 요소
+	 * 
+	 * 	- <set>
+	 * 	> set 절 앞 뒤에 내용을 더 추가하거나 삭제할 때 사용하는 요소
+	 * 
+	 * 7. 일대다 관계 테이블 매핑
+	 * - 마이바티스 기능을 활용하여 매핑 파일을 적절하게 정의하면 일대다 관계 테이블 매핑을 쉽게 처리할 수 있다
+	 * 
+	 * 	1) 게시판 구현 설명
+	 * 		- 회원 등록 화면 컨트롤러 만들기(member/CrudMemberController)
+	 * 		- 회원 등록 화면 컨트롤러 메소드 만들기(crudMemberRegisterForm:get)
+	 * 		- 회원 등록 화면 만들기
+	 * 
+	 * 		- 회원 등록 기능 컨트롤러 메소드 만들기(crudMemberRegister:post)
+	 * 		- 회원 등록 기능 인터페이스 메소드 만들기
+	 * 		- 회원 등록 기능 클래스 메소드 만들기
+	 * 		- 회원 등록 Mapper 인터페이스 메소드 만들기
+	 * 		- 회원 등록 Mapper xml 쿼리 만들기
+	 * 		- 회원 등록 완료페이지 만들기(crud/member/success.jsp)
+	 * 
+	 * 		- 회원 목록 화면 컨트롤러 메소드 만들기(crudMemberList:get)
+	 * 		- 회원 목록 화면 서비스 인터페이스 만들기
+	 * 		- 회원 목록 화면 서비스 클래스 메소드 만들기
+	 * 		- 회원 목록 화면 Mapper 인터페이스 만들기
+	 * 		- 회원 목록 화면 Mappe xml 쿼리 만들기
+	 * 		- 회원 목록 화면 페이지 만들기(crud/member/list.jsp)
+	 * 
+	 * 		- 회원 상세 화면 컨트롤러 메소드 만들기(crudMemberRead:get)
+	 * 		- 회원 상세 화면 서비스 인터페이스 메소드 만들기
+	 * 		- 회원 상세 화면 서비스 클래스 메소드 만들기
+	 * 		- 회원 상세 화면 Mapper 인터페이스 만들기
+	 * 		- 회원 상세 화면 Mapper xml 쿼리 만들기
+	 * 		- 회원 상세 화면 만들기(crud/member/read.jsp)
 	 */
 }
