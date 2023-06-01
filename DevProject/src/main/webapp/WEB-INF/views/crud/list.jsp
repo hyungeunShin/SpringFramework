@@ -10,7 +10,14 @@
 <body>
 	<h2>List</h2>
 	<a href="/crud/board/register">등록</a>
+	
+	<form action="/crud/board/search" method="post">
+		<input type="text" name="title" value="${board.title}">
+		<input type="submit" value="검색">
+	</form>
+	
 	<br><br>
+	
 	<table border="1">
 		<tr>
 			<td align="center" width="80">번호</td>
