@@ -7,4 +7,6 @@ public interface INoticeService {
 	public ServiceResult insertNotice(NoticeVO notice);
 
 	public NoticeVO selectNotice(int boNo);
+
+	public ServiceResult updateNotice(NoticeVO notice);
 }

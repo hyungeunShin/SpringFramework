@@ -8,4 +8,6 @@ public interface NoticeMapper {
 	public void incrementHit(int boNo);
 
 	public NoticeVO selectNotice(int boNo);
+
+	public int updateNotice(NoticeVO notice);
 }

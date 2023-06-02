@@ -39,4 +39,18 @@ public class NoticeServiceImpl implements INoticeService {
 		noticeMapper.incrementHit(boNo);
 		return noticeMapper.selectNotice(boNo);
 	}
+
+	@Override
+	public ServiceResult updateNotice(NoticeVO notice) {
+		ServiceResult result = null;
+		int status = noticeMapper.updateNotice(notice);
+		
+		if(status > 0) {
+			result = ServiceResult.OK;
+		} else {
+			result = ServiceResult.FAILED;
+		}
+		
+		return result;
+	}
 }

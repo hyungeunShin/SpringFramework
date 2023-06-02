@@ -25,4 +25,11 @@
 		  from notice
 		 where bo_no = #{boNo}
 	</select>
+	
+	<update id="updateNotice" parameterType="noticeVO">
+		update notice
+		set
+			bo_title = #{boTitle}, bo_content = #{boContent}, bo_date = sysdate
+		 where bo_no = #{boNo} 
+	</update>
 </mapper>

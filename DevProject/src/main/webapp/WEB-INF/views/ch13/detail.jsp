@@ -49,14 +49,40 @@
 							</ul>
 						</div>
 						<div class="card-footer">
-							<button type="submit" class="btn btn-primary">목록</button>
-							<button type="submit" class="btn btn-info">수정</button>
-							<button type="submit" class="btn btn-danger">삭제</button>
+							<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+							<button type="button" id="modifyBtn" class="btn btn-info">수정</button>
+							<button type="button" id="delBtn" class="btn btn-danger">삭제</button>
 						</div>
 					</form>
 				</div>
 			</div>
+			<form action="/notice/delete" method="post" id="noticeForm">
+				<input type="hidden" name="boNo" value="${notice.boNo}">
+			</form>
 			<div class="col-md-6"></div>
 		</div>
 	</div>
 </section>
+
+<script>
+let listBtn = $("#listBtn");
+let modifyBtn = $("#modifyBtn");
+let delBtn = $("#delBtn");
+let form = $("#noticeForm");
+
+listBtn.on("click", function() {
+	location.href = "/notice/list";
+});
+
+modifyBtn.on("click", function() {
+	form.attr("action", "/notice/update");
+	form.attr("method", "get");
+	form.submit();
+});
+
+delBtn.on("click", function() {
+	if(confirm("정말 삭제하시겠습니까?")) {
+		form.submit();
+	}
+});
+</script>

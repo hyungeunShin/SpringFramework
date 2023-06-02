@@ -1,4 +1,4 @@
-package kr.or.ddit;
+package kr.or.ddit.controller.ch04;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
