@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.controller.ch13.service.INoticeService;
 import kr.or.ddit.vo.NoticeVO;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/notice")
