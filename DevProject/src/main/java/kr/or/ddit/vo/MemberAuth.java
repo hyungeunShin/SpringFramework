@@ -6,7 +6,13 @@ import lombok.Data;
 public class MemberAuth {
 	private int userNo;
 	private String auth;
+	
+	public MemberAuth() {
+		super();
+	}
+	
 	public MemberAuth(String auth) {
 		this.auth = auth;
 	}
+
 }

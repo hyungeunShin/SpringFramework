@@ -110,4 +110,44 @@ public class MybatisController {
 	 * 7. 일대다 관계 테이블 매핑
 	 * - 마이바티스 기능을 활용하여 매핑 파일을 적절하게 정의하면 일대다 관계 테이블 매핑을 쉽게 처리할 수 있다
 	 */
+	
+	
+	/*
+	 * ============부트스트랩을 이용한 CRUD================
+	 * 
+	 * 페이지 모듈화를 위한 Tiles를 사용
+	 * 
+	 * 1. Tiles 란?
+	 * - 어떤 jsp를 템플릿으로 사용하고 템플릿의 각 영역을 어떤 내용으로 채울지에 대한 정보를 설정
+	 * - 하나의 화면들을 만들다보면 공통으로 반복적으로 생성해야 하는 header, footer와 같은 영역이 존재
+	 * 우리는 그러한 공통 부분들을 분리하여 반복적으로 컴포넌트들을 사용하는게 아니라 공통적인 부분은 한번만 가져다 쓰고
+	 * 변화하는 부분에 대해서만 동적으로 변환해 페이지를 관리할 수 있게된다
+	 * 이렇게 header/footer/menu 등 공통적인 소스를 분리하여 한 화면에서 동적으로 레이아웃을 한 곳에 배치하여 설정하고 관리할 수 있도록 도와주는 페이지 모듈화를 돕는 프레임워크가 Tiles이다
+	 * 
+	 * ** 모듈화를 진행할 페이지
+	 * 	- template.jsp  (메인으로 사용할 템플릿)
+	 * 	- header.jsp	(header영역에서 사용할 페이지)
+	 * 	- footer.jsp	(footer영역에서 사용할 페이지)
+	 * 	- content source (body 영역에서 사용할 동적으로 변화할 페이지)
+	 * 
+	 * 	그 외에 다양한 영역의 페이지는 구현하고자 하는 시나리오를 바탕으로 페이지가 구성될 때 추가적으로 레이아웃 영역을 분리하여 작성하면 된다
+	 * 
+	 * 2. Tiles 설정
+	 * 	1) Tiles를 사용하기 위한 의존 관계 등록
+	 * 	- tiles-core
+	 * 	- tiles-api
+	 * 	- tiles-servlet
+	 * 	- tiles-jsp
+	 * 
+	 * 	** 의존관계를 등록 후 꼭 Project Update를 진행해서 라이브러리 등록을 진행
+	 * 
+	 * 	2) servlet-context.xml 수정
+	 * 		- viewResolver order 순서 변경
+	 * 		- tilesViewResolver Bean 등록
+	 * 
+	 * 	3) tiles 설정을 위한 xml 생성
+	 * 		- WEB-INF/spring/tiles-config.xml
+	 * 
+	 * 	4) tiles xml에 설정한 layout 설정대로 페이지를 생성(.jsp)
+	 */
 }
