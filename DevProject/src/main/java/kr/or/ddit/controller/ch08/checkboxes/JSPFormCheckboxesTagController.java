@@ -31,7 +31,7 @@ public class JSPFormCheckboxesTagController {
 		map.put("03", "Movie");
 		model.addAttribute("hobbyMap", map);
 		model.addAttribute(new Member());
-		return "form/checkboxes/registerForm01";
+		return "ch08/checkboxes/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -42,6 +42,6 @@ public class JSPFormCheckboxesTagController {
 		hobbyCodeList.add(new CodeLabelValue("03", "Music"));
 		model.addAttribute("hobbyCodeList", hobbyCodeList);
 		model.addAttribute("member", new Member());
-		return "form/checkboxes/registerForm02";
+		return "ch08/checkboxes/registerForm02";
 	}
 }

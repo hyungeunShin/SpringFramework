@@ -48,7 +48,7 @@ public class MemberController {
 	@RequestMapping(value="/registerForm", method=RequestMethod.GET)
 	public String registerForm() {
 		log.info("registerForm");
-		return "member/registerForm";
+		return "ch05/registerForm";
 	}
 	
 	//1
@@ -56,7 +56,7 @@ public class MemberController {
 	public String registerByParameter(String userId, String password) {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//2
@@ -65,7 +65,7 @@ public class MemberController {
 		//결과는 null 출력
 		//@pathvariable을 이용하지 않으면 받을 수 가 없다.
 		log.info("id : " + userId);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//3
@@ -74,7 +74,7 @@ public class MemberController {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//4
@@ -82,7 +82,7 @@ public class MemberController {
 	public String register02(String userId, String password) {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//5
@@ -91,7 +91,7 @@ public class MemberController {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//6
@@ -100,7 +100,7 @@ public class MemberController {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//7
@@ -109,7 +109,7 @@ public class MemberController {
 		log.info("id : " + userId);
 		log.info("pw : " + password);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	/*
@@ -131,13 +131,13 @@ public class MemberController {
 			@PathVariable("coin") int coin) {
 		log.info("id : " + userId);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/register0101", method=RequestMethod.POST)
 	public String register0101(String userId) {
 		log.info("id : " + userId);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//클라이언트에서 선언된 필드명은 userId 인데 서버 컨트롤러 메소드에서 받는 필드명이 id이면 받을 수 없다
@@ -146,7 +146,7 @@ public class MemberController {
 	public String register0201(String id) {
 		//null이 나옴
 		log.info("id : " + id);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//데이터를 받는 필드명은 동일하게 userId로 하고 사용하는 변수명은 달리 할 수 있다.
@@ -155,7 +155,7 @@ public class MemberController {
 	public String register0202(@RequestParam("userId") String id) {
 		//null이 나옴
 		log.info("id : " + id);
-		return "success";
+		return "ch05/success";
 	}
 	
 	/*
@@ -165,14 +165,14 @@ public class MemberController {
 	@RequestMapping(value="/beans/register01", method=RequestMethod.POST)
 	public String registerJavaBeans01(Member mem) {
 		log.info("mem : " + mem);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/beans/register02", method=RequestMethod.POST)
 	public String registerJavaBeans02(Member mem, int coin) {
 		log.info("mem : " + mem);
 		log.info("coin : " + coin);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/beans/register03", method=RequestMethod.POST)
@@ -180,7 +180,7 @@ public class MemberController {
 		log.info("uid : " + uid);
 		log.info("mem : " + mem);
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	/*
@@ -196,19 +196,19 @@ public class MemberController {
 			@DateTimeFormat(pattern="yyyyMMdd") Date dateOfBirth) {
 		log.info("userId : " + userId);
 		log.info("dateOfBirth : " + dateOfBirth);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerByGet02", method=RequestMethod.GET)
 	public String registerByGet02(Member mem) {
 		log.info("mem : " + mem);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String register(Member mem) {
 		log.info("mem : " + mem);
-		return "success";
+		return "ch05/success";
 	}
 	
 	/*
@@ -225,38 +225,38 @@ public class MemberController {
 	@RequestMapping(value="/registerUserId", method=RequestMethod.POST)
 	public String registerUserId(String userId) {
 		log.info("userId : " + userId);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerMemberUserId", method=RequestMethod.POST)
 	public String registerMemberUserId(Member mem) {
 		log.info("mem : " + mem);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerPassword", method=RequestMethod.POST)
 	public String registerPassword(String password) {
 		log.info("password : " + password);
-		return "success";
+		return "ch05/success";
 	}
 	
 	//라디오버튼
 	@RequestMapping(value="/registerRadio", method=RequestMethod.POST)
 	public String registerRadio(String gender) {
 		log.info("gender : " + gender);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerSelect", method=RequestMethod.POST)
 	public String registerSelect(String nationality) {
 		log.info("nationality : " + nationality);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerMultiSelect01", method=RequestMethod.POST)
 	public String registerMultiSelect01(String cars) {
 		log.info("cars : " + cars);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerMultiSelect02", method = RequestMethod.POST)
@@ -270,7 +270,7 @@ public class MemberController {
 			log.info("carArray is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	//List로는 데이터를 받을 수 없다
@@ -286,13 +286,13 @@ public class MemberController {
 			log.info("carList is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerCheckbox01", method=RequestMethod.POST)
 	public String registerCheckbox01(String hobby) {
 		log.info("hobby : " + hobby);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerCheckbox02", method=RequestMethod.POST)
@@ -305,7 +305,7 @@ public class MemberController {
 			log.info("hobbyArray is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerCheckbox03", method=RequestMethod.POST)
@@ -322,7 +322,7 @@ public class MemberController {
 			log.info("hobbyList is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerCheckbox04", method=RequestMethod.POST)
@@ -330,7 +330,7 @@ public class MemberController {
 		//값이 존재하면 value속성이 들어오고 
 		//값이 존재하지 않으면 null이 넘어온다
 		log.info("developer : " + developer);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerCheckbox05", method=RequestMethod.POST)
@@ -339,7 +339,7 @@ public class MemberController {
 		//체크된 값이 존재하면 value 속성에 설정된 true가 넘어오고
 		//체크된 값이 존재하지 않으면 false가 넘어온다
 		log.info("foreigner : " + foreigner);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerAddress", method=RequestMethod.POST)
@@ -349,7 +349,7 @@ public class MemberController {
 		} else {
 			log.info("addr is null");
 		}
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerUserAddress", method=RequestMethod.POST)
@@ -368,7 +368,7 @@ public class MemberController {
 			log.info("address is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerUserCardList", method=RequestMethod.POST)
@@ -386,13 +386,13 @@ public class MemberController {
 			log.info("list is null");
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerTextArea", method=RequestMethod.POST)
 	public String registerTextArea(String introduction) {
 		log.info("introduction : " + introduction);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerDate01", method=RequestMethod.POST)
@@ -401,12 +401,12 @@ public class MemberController {
 		//내가 원하는 Date타입의 형식이 존재한다면 @DateTimeFormat(pattern=)속성을 이용하여 
 		//원하는 패턴을 설정하여 날짜 형식의 값을 넘겨받는다(pattern='yyyyMMdd', pattern='yyyy-MM-dd')
 		log.info("dateOfBirth : " + dateOfBirth);
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerAllForm", method=RequestMethod.GET)
 	public String registerAllForm() {
-		return "member/registerAllForm";
+		return "ch05/registerAllForm";
 	}
 	
 	@RequestMapping(value="/registerUser", method=RequestMethod.POST)
@@ -500,7 +500,7 @@ public class MemberController {
 		log.info("자기소개 : " + member.getIntroduction());
 		
 		model.addAttribute("member", member);
-		return "member/result";
+		return "ch05/result";
 	}
 	
 	/*
@@ -522,7 +522,7 @@ public class MemberController {
 		log.info("originalName : " + picture.getOriginalFilename());
 		log.info("size : " + picture.getSize());
 		log.info("contentType : " + picture.getContentType());
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile02", method=RequestMethod.POST)
@@ -533,7 +533,7 @@ public class MemberController {
 		log.info("originalName : " + picture.getOriginalFilename());
 		log.info("size : " + picture.getSize());
 		log.info("contentType : " + picture.getContentType());
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile03", method=RequestMethod.POST)
@@ -543,7 +543,7 @@ public class MemberController {
 		log.info("originalName : " + picture.getOriginalFilename());
 		log.info("size : " + picture.getSize());
 		log.info("contentType : " + picture.getContentType());
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile04", method=RequestMethod.POST)
@@ -558,7 +558,7 @@ public class MemberController {
 		log.info("size : " + picture.getSize());
 		log.info("contentType : " + picture.getContentType());
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile05", method=RequestMethod.POST)
@@ -571,7 +571,7 @@ public class MemberController {
 		log.info("size2 : " + picture2.getSize());
 		log.info("contentType2 : " + picture2.getContentType());
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	//list는 못받는다
@@ -585,7 +585,7 @@ public class MemberController {
 			log.info(i + "contentType : " + pictureList.get(i).getContentType());
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile07", method=RequestMethod.POST)
@@ -601,7 +601,7 @@ public class MemberController {
 		
 		log.info("mem : " + mem);
 		
-		return "success";
+		return "ch05/success";
 	}
 	
 	@RequestMapping(value="/registerFile08", method=RequestMethod.POST)
@@ -614,6 +614,6 @@ public class MemberController {
 			log.info(i + "contentType : " + pictureList[i].getContentType());
 		}
 		
-		return "success";
+		return "ch05/success";
 	}
 }

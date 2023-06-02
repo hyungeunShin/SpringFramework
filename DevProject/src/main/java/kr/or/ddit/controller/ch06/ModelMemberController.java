@@ -31,7 +31,7 @@ public class ModelMemberController {
 		model.addAttribute("userName", "홍길동");
 		model.addAttribute("birthDay", "1999-09-09");
 		
-		return "member/read01";
+		return "ch06/read01";
 	}
 	
 	//2) Model 객체에 자바빈즈 클래스 객체를 값으로만 전달할 때는 뷰에서 참조할 이름을 클래스명의 앞글자를 소문자로 변환하여 처리
@@ -53,7 +53,7 @@ public class ModelMemberController {
 		member.setDateOfBirth(cal.getTime());
 		model.addAttribute(member);
 		
-		return "member/read02";
+		return "ch06/read02";
 	}
 	
 	//3) Model 객체에 자바빈즈 클래스 객체를 특정한 이름을 지정하여 전달 가능
@@ -75,7 +75,7 @@ public class ModelMemberController {
 		member.setDateOfBirth(cal.getTime());
 		model.addAttribute("user", member);
 		
-		return "member/read03";
+		return "ch06/read03";
 	}
 	
 	//4) Model 객체를 통해 배열과 컬렉션 객체를 전달
@@ -97,7 +97,7 @@ public class ModelMemberController {
 		model.addAttribute("hobbyArray", hobbyArray);
 		model.addAttribute("hobbyList", hobbyList);
 		
-		return "member/read04";
+		return "ch06/read04";
 	}
 	
 	//5) Model 객체를 통해 중첩된 자바빈즈 클래스 객체를 전달
@@ -137,7 +137,7 @@ public class ModelMemberController {
 		mem.setCardList(cardList);
 		
 		model.addAttribute("user", mem);
-		return "member/read05";
+		return "ch06/read05";
 	}
 	
 	//6) Model 객체를 통해 다양한 타입의 값을 전달 가능
@@ -204,6 +204,6 @@ public class ModelMemberController {
 		mem.setIntroduction("ㅎㅇㅎㅇ\nㅂㅇㅂㅇ");
 		
 		model.addAttribute("user", mem);
-		return "member/read06";
+		return "ch06/read06";
 	}
 }

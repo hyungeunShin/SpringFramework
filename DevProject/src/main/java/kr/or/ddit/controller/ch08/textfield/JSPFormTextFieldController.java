@@ -17,7 +17,7 @@ public class JSPFormTextFieldController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "/form/textfield/registerForm01";
+		return "ch08/textfield/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -27,6 +27,6 @@ public class JSPFormTextFieldController {
 		member.setUserName("이길동");
 		member.setEmail("aaa@ddit.com");
 		model.addAttribute("member", member);
-		return "/form/textfield/registerForm01";
+		return "ch08/textfield/registerForm01";
 	}
 }

@@ -26,7 +26,7 @@ public class JSPFormCheckboxTagController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/checkbox/registerForm01";
+		return "ch08/checkbox/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -46,7 +46,7 @@ public class JSPFormCheckboxTagController {
 		
 		member.setHobbyList(list);
 		model.addAttribute("member", member);
-		return "form/checkbox/registerForm01";
+		return "ch08/checkbox/registerForm01";
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.POST)
@@ -70,6 +70,6 @@ public class JSPFormCheckboxTagController {
 		}
 		
 		//model.addAttribute("member", member);
-		return "form/checkbox/result";
+		return "ch08/checkbox/result";
 	}
 }

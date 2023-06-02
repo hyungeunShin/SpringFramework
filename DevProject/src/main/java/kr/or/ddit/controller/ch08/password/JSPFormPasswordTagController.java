@@ -23,7 +23,7 @@ public class JSPFormPasswordTagController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/password/registerForm01";
+		return "ch08/password/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -33,6 +33,6 @@ public class JSPFormPasswordTagController {
 		Member member = new Member();
 		member.setPassword("11231241");
 		model.addAttribute("member", member);
-		return "form/password/registerForm01";
+		return "ch08/password/registerForm01";
 	}
 }

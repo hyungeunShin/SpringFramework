@@ -19,6 +19,6 @@ public class JSPFormLabelTagController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/label/registerForm01";
+		return "ch08/label/registerForm01";
 	}
 }

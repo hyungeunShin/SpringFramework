@@ -155,7 +155,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId("<p>hong<>&%0101</p>");
 		model.addAttribute("member", member);
-		return "home/jstl/home0101";
+		return "ch07/jstl/home0101";
 	}
 	
 	@RequestMapping(value="/home0102")
@@ -163,7 +163,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId("<p>hong<>&%0101</p>");
 		model.addAttribute("member", member);
-		return "home/jstl/home0102";
+		return "ch07/jstl/home0102";
 	}
 	
 	@RequestMapping(value="/home0103")
@@ -171,7 +171,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId(null);
 		model.addAttribute("member", member);
-		return "home/jstl/home0103";
+		return "ch07/jstl/home0103";
 	}
 	
 	//c:set
@@ -180,7 +180,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId("hong");
 		model.addAttribute("member", member);
-		return "home/jstl/home0201";
+		return "ch07/jstl/home0201";
 	}
 	
 	@RequestMapping(value="/home0202")
@@ -188,7 +188,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId("hong");
 		model.addAttribute("member", member);
-		return "home/jstl/home0202";
+		return "ch07/jstl/home0202";
 	}
 	
 	//c:remove
@@ -197,7 +197,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setUserId("hong");
 		model.addAttribute("member", member);
-		return "home/jstl/home0301";
+		return "ch07/jstl/home0301";
 	}
 	
 	//c:catch
@@ -208,12 +208,12 @@ public class JSTLHomeController {
 		member.setHobbyArray(hobbyArray);
 		model.addAttribute("member", member);
 		
-		return "home/jstl/home0401";
+		return "ch07/jstl/home0401";
 	}
 	
 	@RequestMapping(value="/home0402")
 	public String home0402(Model model) {
-		return "home/jstl/home0402";
+		return "ch07/jstl/home0402";
 	}
 	
 	//c:if
@@ -222,7 +222,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setForeigner(true);
 		model.addAttribute("member", member);
-		return "home/jstl/home0501";
+		return "ch07/jstl/home0501";
 	}
 	
 	//c:choose, c:when, c:otherwise
@@ -231,7 +231,7 @@ public class JSTLHomeController {
 		Member member = new Member();
 		member.setGender("Male");
 		model.addAttribute("member", member);
-		return "home/jstl/home0601";
+		return "ch07/jstl/home0601";
 	}
 	
 	//c:forEach
@@ -241,7 +241,7 @@ public class JSTLHomeController {
 		String[] hobbyArray = {"Music", "Movie"};
 		member.setHobbyArray(hobbyArray);
 		model.addAttribute("member", member);
-		return "home/jstl/home0701";
+		return "ch07/jstl/home0701";
 	}
 	
 	//c:forTokens
@@ -251,18 +251,18 @@ public class JSTLHomeController {
 		String hobby = "Music, Movie";
 		member.setHobby(hobby);
 		model.addAttribute("member", member);
-		return "home/jstl/home0801";
+		return "ch07/jstl/home0801";
 	}
 	
 	//c:import
 	@RequestMapping(value="/home0901")
 	public String home0901(Model model) {
-		return "home/jstl/home0901";
+		return "ch07/jstl/home0901";
 	}
 	
 	//c:redirect
 	@RequestMapping(value="/home1001")
 	public String home1001(Model model) {
-		return "home/jstl/home1001";
+		return "ch07/jstl/home1001";
 	}
 }

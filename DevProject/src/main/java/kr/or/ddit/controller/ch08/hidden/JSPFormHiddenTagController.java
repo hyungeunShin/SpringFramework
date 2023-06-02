@@ -23,11 +23,11 @@ public class JSPFormHiddenTagController {
 		member.setUserId("hong123");
 		member.setUserName("홍길동");
 		model.addAttribute("member", member);
-		return "form/hidden/registerForm01";
+		return "ch08/hidden/registerForm01";
 	}
 	
 	@RequestMapping(value="/result")
 	public String result(@ModelAttribute Member member, Model model) {
-		return "form/hidden/result";
+		return "ch08/hidden/result";
 	}
 }

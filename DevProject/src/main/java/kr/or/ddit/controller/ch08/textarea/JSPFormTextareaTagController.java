@@ -19,7 +19,7 @@ public class JSPFormTextareaTagController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/textarea/registerForm01";
+		return "ch08/textarea/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -27,7 +27,7 @@ public class JSPFormTextareaTagController {
 		Member member = new Member();
 		member.setIntroduction("ㅎㅇ안녕하세요");
 		model.addAttribute("member", member);
-		return "form/textarea/registerForm01";
+		return "ch08/textarea/registerForm01";
 	}
 	
 }

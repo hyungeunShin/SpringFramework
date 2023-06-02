@@ -20,7 +20,7 @@ public class ModelAttributeMemberController {
 	
 	@RequestMapping(value="/registerForm", method=RequestMethod.GET)
 	public String registerForm() {
-		return "member/registerModelAttributeForm";
+		return "ch06/registerModelAttributeForm";
 	}
 	
 	@RequestMapping(value="/register01", method = RequestMethod.POST)
@@ -28,7 +28,7 @@ public class ModelAttributeMemberController {
 		log.info("id : " + userId);
 		log.info("password " + password);
 		
-		return "result";
+		return "ch06/result";
 	}
 	
 	//modelAttribute 사용
@@ -38,7 +38,7 @@ public class ModelAttributeMemberController {
 		log.info("id : " + userId);
 		log.info("password " + password);
 		
-		return "result";
+		return "ch06/result";
 	}
 	
 	//3
@@ -47,6 +47,6 @@ public class ModelAttributeMemberController {
 		log.info("id : " + mem.getUserId());
 		log.info("password " + mem.getPassword());
 		
-		return "result";
+		return "ch06/result";
 	}
 }

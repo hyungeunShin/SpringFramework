@@ -40,7 +40,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate);
 		
-		return "home";
+		return "ch04/home";
 	}
 	
 	/*
@@ -71,33 +71,33 @@ public class HomeController {
 	@RequestMapping(value="/goHome0201", method=RequestMethod.GET)
 	public String goHome0201() {
 		log.info("goHome0201() 실행...");
-		return "home0201";
+		return "ch04/home0201";
 	}
 	
 	//반환값이 home0202이므로 뷰(/home0202.jsp)
 	@RequestMapping(value="/goHome0202", method=RequestMethod.GET)
 	public String goHome0202() {
 		log.info("goHome0202() 실행...");
-		return "home0202";
+		return "ch04/home0202";
 	}
 	
 	@RequestMapping(value="/sub/goHome0203", method=RequestMethod.GET)
 	public String goHome0203() {
 		log.info("goHome0203()");
-		return "sub/home0203";
+		return "ch04/home0203";
 	}
 	
 	//반환값이 redirect:/로 시작하면 리다이렉트 방식
 	@RequestMapping(value="/sub/goHome0204", method=RequestMethod.GET)
 	public String goHome0204() {
-		return "redirect:/sub/goHome0203";
+		return "redirect:/ch04/goHome0203";
 	}
 	
 	// '/'로 시작하면 웹 애플리케이션의 컨텍스트 경로에 영향을 받지 않는 절대 경로를 의미한다
 	//해당경로 : D드라이브 > workspace > .metadata > .pluguns > ,,, > devproject > web-inf > views > sub > ...jsp
 	@RequestMapping(value="/sub/goHome0205", method=RequestMethod.GET)
 	public String goHome0205() {
-		return "/sub/home0205";
+		return "ch04/home0205";
 	}
 	
 	/*

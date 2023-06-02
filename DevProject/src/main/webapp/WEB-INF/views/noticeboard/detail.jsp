@@ -21,11 +21,11 @@
 			<div class="col-md-12">
 				<div class="card card-primary">
 					<div class="card-header">
-						<h3 class="card-title">제목입니다!!</h3>
-						<div class="card-tools">관리자 2022-12-12 12:11 1456</div>
+						<h3 class="card-title">${notice.boTitle}</h3>
+						<div class="card-tools">${notice.boWriter} ${notice.boDate} ${notice.boHit}</div>
 					</div>
 					<form id="quickForm" novalidate="novalidate">
-						<div class="card-body">내용입니다.</div>
+						<div class="card-body">${notice.boContent}</div>
 						<div class="card-footer bg-white">
 							<ul	class="mailbox-attachments d-flex align-items-stretch clearfix">
 								<li>

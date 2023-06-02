@@ -67,14 +67,14 @@ public class JSPFormtagController {
 		//form:form 을 사용할 때 modelAttribute="member"를 사용
 		//하지만 이때 modelAttribute="member"를 사용하기 위해서 이 별칭을 지칭한 new Member()를 생성해서 보내줘야 한다
 		model.addAttribute("member", new Member());
-		return "home/formtag/registerForm01";
+		return "ch07/formtag/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02", method = RequestMethod.GET)
 	public String registerForm02(Model model) {
 		//키값과 modelattribute의 값이 같아야 한다.
 		model.addAttribute("user", new Member());
-		return "home/formtag/registerForm02";
+		return "ch07/formtag/registerForm02";
 	}
 	
 	@RequestMapping(value="/registerForm03", method = RequestMethod.GET)
@@ -82,7 +82,7 @@ public class JSPFormtagController {
 		//@ModelAttribute("member") ==> member
 		//@ModelAttribute("user") ==> user 
 		//폼 객체의 속성명은 직접 지정하지 않으면 * 폼 객체의 클래스명의 맨 처음 문자를 소문자로 변환하여 처리
-		return "home/formtag/registerForm01";
+		return "ch07/formtag/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm04", method = RequestMethod.GET)
@@ -90,7 +90,7 @@ public class JSPFormtagController {
 		//@ModelAttribute("member") ==> member
 		//@ModelAttribute("user") ==> user 
 		//폼 객체의 속성명은 직접 지정하지 않으면 * 폼 객체의 클래스명의 맨 처음 문자를 소문자로 변환하여 처리
-		return "home/formtag/registerForm02";
+		return "ch07/formtag/registerForm02";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
@@ -99,6 +99,6 @@ public class JSPFormtagController {
 		log.info("name : " + member.getUserName());
 		
 		model.addAttribute("member", member);
-		return "home/formtag/result";
+		return "ch07/formtag/result";
 	}
 }

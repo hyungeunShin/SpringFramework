@@ -108,7 +108,7 @@ public class JSPHomeController {
 		cal.set(Calendar.DAY_OF_MONTH, 30);
 		mem.setDateOfBirth(cal.getTime());
 		model.addAttribute(mem);
-		return "home/home0101";
+		return "ch07/home0101";
 	}
 	
 	@GetMapping(value="/home0102")
@@ -121,7 +121,7 @@ public class JSPHomeController {
 		member.setHobbyArray(hobbyArray);
 		member.setHobbyList(hobbyList);
 		model.addAttribute(member);
-		return "home/home0102";
+		return "ch07/home0102";
 	}
 	
 	@GetMapping(value="/home0103")
@@ -133,7 +133,7 @@ public class JSPHomeController {
 		member.setAddress(address);
 		
 		model.addAttribute(member);
-		return "home/home0103";
+		return "ch07/home0103";
 	}
 	
 	@RequestMapping(value="/home0104")
@@ -146,14 +146,14 @@ public class JSPHomeController {
 		
 		//키값을 명시했으면 jsp페이지에서 명시된 키로 데이터를 출력 할 수 있다
 		model.addAttribute("map", map);
-		return "home/home0104";
+		return "ch07/home0104";
 	}
 	
 	@RequestMapping(value="/home0201")
 	public String home0201(Model model) {
 		int coin = 100;
 		model.addAttribute("coin", coin);
-		return "home/home0201";
+		return "ch07/home0201";
 	}
 	
 	//비교연산자
@@ -161,27 +161,27 @@ public class JSPHomeController {
 	public String home0202(Model model) {
 		int coin = 1000;
 		model.addAttribute("coin", coin);
-		return "home/home0202";
+		return "ch07/home0202";
 	}
 	
 	@RequestMapping(value="/home0203")
 	public String home0203(Model model) {
 		String userId = "hong";
 		model.addAttribute("userId", userId);
-		return "home/home0203";
+		return "ch07/home0203";
 	}
 	
 	//empty
 	@RequestMapping(value="/home0301")
 	public String home0301(Model model) {
-		return "home/home0301";
+		return "ch07/home0301";
 	}
 	
 	@RequestMapping(value="/home0302")
 	public String home0302(Model model) {
 		Member member = new Member();
 		model.addAttribute("member", member);
-		return "home/home0301";
+		return "ch07/home0301";
 	}
 	
 	//논리연산자 사용
@@ -195,6 +195,6 @@ public class JSPHomeController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("member", member);
 		
-		return "home/home0401";
+		return "ch07/home0401";
 	}
 }

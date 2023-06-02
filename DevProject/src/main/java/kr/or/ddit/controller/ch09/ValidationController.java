@@ -49,7 +49,7 @@ public class ValidationController {
 	@RequestMapping(value="/registerValidationForm01")
 	public String registerValidationForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "validation/registerForm01";
+		return "ch09/registerForm01";
 	}
 	
 	@RequestMapping(value="/result", method = RequestMethod.POST)
@@ -58,13 +58,13 @@ public class ValidationController {
 		log.info("name : " + member.getUserName());
 		
 		if(result.hasErrors()) {
-			return "validation/registerForm01";
+			return "ch09/registerForm01";
 		}
 		
 		log.info("password : " + member.getPassword());
 		log.info("email : " + member.getEmail());
 		log.info("gender : " + member.getGender());
-		return "validation/success";
+		return "ch09/success";
 	}
 	
 	/*
@@ -86,7 +86,7 @@ public class ValidationController {
 	@RequestMapping(value="/registerValidationForm02")
 	public String registerValidationForm02(Model model) {
 		model.addAttribute("member", new Member());
-		return "validation/registerForm02";
+		return "ch09/registerForm02";
 	}
 	
 	@RequestMapping(value="/result2", method = RequestMethod.POST)
@@ -118,12 +118,12 @@ public class ValidationController {
 				log.info("default Message : " + err.getDefaultMessage());
 			}
 			
-			return "validation/registerForm02";
+			return "ch09/registerForm02";
 		}
 		
 		log.info("mem : " + member);
 		
-		return "validation/success";
+		return "ch09/success";
 	}
 	
 	/*
@@ -171,13 +171,13 @@ public class ValidationController {
 	@RequestMapping(value="/registerValidationForm03")
 	public String registerValidationForm03(Model model) {
 		model.addAttribute("member", new Member());
-		return "validation/registerForm03";
+		return "ch09/registerForm03";
 	}
 	
 	@RequestMapping(value="/result3", method=RequestMethod.POST)
 	public String result3(@Validated Member member, BindingResult result) {
 		if(result.hasErrors()) {
-			return "validation/registerForm03";
+			return "ch09/registerForm03";
 		}
 		
 		log.info("mem : " + member);
@@ -197,6 +197,6 @@ public class ValidationController {
 			}
 		}
 		
-		return "validation/success";
+		return "ch09/success";
 	}
 }

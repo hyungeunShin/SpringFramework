@@ -23,7 +23,7 @@ public class JSPFormValidationController {
 	@RequestMapping(value="/registerFormValidation01")
 	public String registerFormValidation01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/validation/registerForm01";
+		return "ch09/validation/registerForm01";
 	}
 	
 	@RequestMapping(value="/result", method = RequestMethod.POST)
@@ -32,6 +32,6 @@ public class JSPFormValidationController {
 		log.info("username : " + member.getUserName());
 		log.info("email : " + member.getEmail());
 		
-		return "form/validation/result";
+		return "ch09/validation/result";
 	}
 }

@@ -65,7 +65,7 @@ public class JSPfmttagController {
 	public String home0101(Model model) {
 		int coin = 100;
 		model.addAttribute("coin", coin);
-		return "home/fmttag/home0101";
+		return "ch07/fmttag/home0101";
 	}
 	
 	//2) type 속성이 지정되지 않으면 기본값은 number
@@ -73,58 +73,49 @@ public class JSPfmttagController {
 	public String home0201(Model model) {
 		String coin = "1000";
 		model.addAttribute("coin", coin);
-		return "home/fmttag/home0201";
+		return "ch07/fmttag/home0201";
 	}
-	
-//	//3) type => currency
-//	@RequestMapping(value="/home0202")
-//	public String home0202(Model model) {
-//		String coin = "￦1000";
-//		model.addAttribute("coin", coin);
-//	    return "home/fmttag/home0202";
-//	}
 	
 	@RequestMapping(value="/home0202")
 	public String home0202(Model model) {
 		String coin = "￦1000";
 		model.addAttribute("coin", coin);
-		//return "home/fmttag/home0202";
-		return "home/fmttag/test";
+		return "ch07/fmttag/home0202";
 	}
 	
 	@RequestMapping(value="/home0203")
 	public String home0203(Model model) {
 		String coin = "1,000.25";
 		model.addAttribute("coin", coin);
-		return "home/fmttag/home0203";
+		return "ch07/fmttag/home0203";
 	}
 	
 	@RequestMapping(value="/home0301")
 	public String home0301(Model model) {
 		Date date = new Date();
 		model.addAttribute("now", date);
-		return "home/fmttag/home0301";
+		return "ch07/fmttag/home0301";
 	}
 	
 	@RequestMapping(value="/home0302")
 	public String home0302(Model model) {
 		Date date = new Date();
 		model.addAttribute("now", date);
-		return "home/fmttag/home0302";
+		return "ch07/fmttag/home0302";
 	}
 	
 	@RequestMapping(value="/home0303")
 	public String home0303(Model model) {
 		Date date = new Date();
 		model.addAttribute("now", date);
-		return "home/fmttag/home0303"; 
+		return "ch07/fmttag/home0303"; 
 	}
 	
 	@RequestMapping(value="/home0304")
 	public String home0304(Model model) {
 		Date date = new Date();
 		model.addAttribute("now", date);
-		return "home/fmttag/home0304"; 
+		return "ch07/fmttag/home0304"; 
 	}
 	
 	//dateStyle 속성을 지정하지 않으면 기본값은 default
@@ -132,7 +123,7 @@ public class JSPfmttagController {
 	public String home0401(Model model) {
 		String dateValue = "2023. 10. 30";
 		model.addAttribute("dateValue", dateValue);
-		return "home/fmttag/home0401";
+		return "ch07/fmttag/home0401";
 	}
 	
 	@RequestMapping(value="/home0402")
@@ -143,13 +134,13 @@ public class JSPfmttagController {
 		//String dateValue = "2020년 2월 1일 금요일"; // full
 		//각 dateStyle로 지정된 값이 페이지로 넘어가 pasing 될 때 parseDate 내에 dateStyle을 각 값과 일치하는 스타일 형태로 지정해주어야 값이 파싱
 		model.addAttribute("dateValue", dateValue);
-		return "home/fmttag/home0402";
+		return "ch07/fmttag/home0402";
 	}
 	
 	@RequestMapping(value="/home0403")
 	public String home0403(Model model) {
 		String dateValue = "2022-02-01 15:00:24";
 		model.addAttribute("dateValue", dateValue);
-		return "home/fmttag/home0403";
+		return "ch07/fmttag/home0403";
 	}
 }

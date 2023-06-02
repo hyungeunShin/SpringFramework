@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,15 @@
 <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
+
+<c:if test="${not empty message}">
+<script type="text/javascript">
+alert("${message}");
+<c:remove var="message" scope="request" />
+<c:remove var="message" scope="session" />
+</script>
+</c:if>
+
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
 		<!-- tiles-config에  설정했던 이름 -->

@@ -35,7 +35,7 @@ public class JSPFormRadioTagController {
 		map.put("03", "Other");
 		model.addAttribute("map", map);
 		model.addAttribute("member", new Member());
-		return "form/radio/registerForm01";
+		return "ch08/radio/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -46,13 +46,13 @@ public class JSPFormRadioTagController {
 		list.add(new CodeLabelValue("03", "Other"));
 		model.addAttribute("genderCodeList", list);
 		model.addAttribute("member", new Member());
-		return "form/radio/registerForm02";
+		return "ch08/radio/registerForm02";
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.POST)
 	public String registerFormResult(@ModelAttribute Member member, Model model) {
 		log.info("gender: " + member.getGender());
-		return "form/radio/result";
+		return "ch08/radio/result";
 	}
 	
 	//단일 라디오 버튼
@@ -63,7 +63,7 @@ public class JSPFormRadioTagController {
 	@RequestMapping(value="/registerForm03")
 	public String registerForm03(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/radio/registerForm03";
+		return "ch08/radio/registerForm03";
 	}
 	
 	@RequestMapping(value="/registerForm04")
@@ -71,6 +71,6 @@ public class JSPFormRadioTagController {
 		Member member = new Member();
 		member.setGender("Male");
 		model.addAttribute("member", member);
-		return "form/radio/registerForm03";
+		return "ch08/radio/registerForm03";
 	}
 }

@@ -33,7 +33,7 @@ public class JSPFormSelectboxTagController {
 		
 		model.addAttribute("map", map);
 		model.addAttribute("member", new Member());
-		return "form/selectbox/registerForm01";
+		return "ch08/selectbox/registerForm01";
 	}
 	
 	@RequestMapping(value="/registerForm02")
@@ -45,7 +45,7 @@ public class JSPFormSelectboxTagController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("member", new Member());
-		return "form/selectbox/registerForm02";
+		return "ch08/selectbox/registerForm02";
 	}
 	
 	@RequestMapping(value="/registerForm03")
@@ -57,11 +57,11 @@ public class JSPFormSelectboxTagController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("member", new Member());
-		return "form/selectbox/registerForm03";
+		return "ch08/selectbox/registerForm03";
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.POST)
 	public String result(@ModelAttribute Member member, Model model) {
-		return "form/selectbox/result";
+		return "ch08/selectbox/result";
 	}
 }

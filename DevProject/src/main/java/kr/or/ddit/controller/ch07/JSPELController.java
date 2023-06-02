@@ -64,6 +64,6 @@ public class JSPELController {
 	public String home0101(Model model) {
 		String str = "<font>Hello World</font>"; 
 		model.addAttribute("str", str);
-		return "home/el/home0101";
+		return "ch07/el/home0101";
 	}
 }

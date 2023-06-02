@@ -19,6 +19,6 @@ public class JSPFormButtonTagController {
 	@RequestMapping(value="/registerForm01")
 	public String registerForm01(Model model) {
 		model.addAttribute("member", new Member());
-		return "form/button/registerForm01";
+		return "ch08/button/registerForm01";
 	}
 }
