@@ -1,4 +1,4 @@
-package kr.or.ddit.controller.ch08.validation;
+package kr.or.ddit.controller.ch09;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

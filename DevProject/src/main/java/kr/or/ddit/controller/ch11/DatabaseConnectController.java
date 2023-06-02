@@ -1,4 +1,4 @@
-package kr.or.ddit.controller.database;
+package kr.or.ddit.controller.ch11;
 
 public class DatabaseConnectController {
 	/*
