@@ -1,5 +1,7 @@
 package kr.or.ddit.controller.ch13.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import kr.or.ddit.ServiceResult;
 import kr.or.ddit.controller.ch13.web.TelegramSendController;
 import kr.or.ddit.mapper.NoticeMapper;
 import kr.or.ddit.vo.NoticeVO;
+import kr.or.ddit.vo.PaginationInfoVO;
 
 @Service
 public class NoticeServiceImpl implements INoticeService {
@@ -52,5 +55,29 @@ public class NoticeServiceImpl implements INoticeService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public ServiceResult deleteNotice(int boNo) {
+		ServiceResult result = null;
+		int status = noticeMapper.deleteNotice(boNo);
+		
+		if(status > 0) {
+			result = ServiceResult.OK;
+		} else {
+			result = ServiceResult.FAILED;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int selectNoticeCount(PaginationInfoVO<NoticeVO> pagingVO) {
+		return noticeMapper.selectNoticeCount(pagingVO);
+	}
+
+	@Override
+	public List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO) {
+		return noticeMapper.selectNoticeList(pagingVO);
 	}
 }

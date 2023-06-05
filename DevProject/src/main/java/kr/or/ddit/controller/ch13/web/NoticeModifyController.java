@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.controller.ch13.service.INoticeService;
@@ -40,6 +41,23 @@ public class NoticeModifyController {
 			model.addAttribute("status", "u");
 			goPage = "notice/form";
 		}
+		
+		return goPage;
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(int boNo, Model model) {
+		String goPage = "";
+		
+		ServiceResult result = noticeService.deleteNotice(boNo);
+		
+		if(result.equals(ServiceResult.OK)) {
+			goPage = "redirect:/notice/list";
+		} else{
+			model.addAttribute("message", "다시 시도해주세요");
+			goPage = "redirect:/notice/detail?boNo=" + boNo;
+		}
+		
 		
 		return goPage;
 	}
