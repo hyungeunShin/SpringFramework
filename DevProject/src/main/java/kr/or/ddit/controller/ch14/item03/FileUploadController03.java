@@ -1,13 +1,20 @@
 package kr.or.ddit.controller.ch14.item03;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,12 +65,85 @@ public class FileUploadController03 {
 	public String item3Register(Item3 item, Model model) {
 		String[] files = item.getFiles();
 		
-		for (int i = 0; i < files.length; i++) {
-			log.info("files[" + i + "] : " + files[i]);
+		if(files != null) {
+			for (int i = 0; i < files.length; i++) {
+				log.info("files[" + i + "] : " + files[i]);
+			}
+			
+			itemService.register(item);
+			model.addAttribute("msg", "등록이 완료되었습니다");
+			return "ch14_3/success";
+		} else {
+			model.addAttribute("msg", "등록을 실패하였습니다");
+			return "ch14_3/success";
 		}
 		
-		itemService.register(item);
-		model.addAttribute("msg", "등록이 완료되었습니다");
+	}
+	
+	@RequestMapping(value="/displayFile")
+	public ResponseEntity<byte[]> displayFile(String fileName) {
+		ResponseEntity<byte[]> entity = null;
+		
+		try(InputStream in = new FileInputStream(resourcePath + fileName)) {
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+			MediaType mtype = MediaUtils.getMediaType(formatName);
+			HttpHeaders headers = new HttpHeaders();
+		
+			if(mtype != null) {
+				headers.setContentType(mtype);
+			} else {
+				fileName = fileName.substring(fileName.indexOf("_") + 1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition", "attachment; fileName\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			}
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String item3List(Model model) {
+		List<Item3> list = itemService.list();
+		model.addAttribute("itemList", list);
+		return "ch14_3/list";
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public String modifyForm(int itemId, Model model) {
+		Item3 item = itemService.read(itemId);
+		model.addAttribute("item", item);
+		return "ch14_3/modify";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getAttach/{itemId}")
+	public List<String> getAttach(@PathVariable int itemId) {
+		log.info("id : " + itemId);
+		return itemService.getAttach(itemId);
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String item3Modify(Item3 item, Model model) {
+		itemService.modify(item);
+		model.addAttribute("msg", "수정이 완료되었습니다");
+		return "ch14_3/success";
+	}
+	
+	@RequestMapping(value="/remove", method=RequestMethod.GET)
+	public String itemRemoveForm(int itemId, Model model) {
+		Item3 item = itemService.read(itemId);
+		model.addAttribute("item", item);
+		return "ch14_3/remove";
+	}
+	
+	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	public String itemRemove(int itemId, Model model) {
+		itemService.remove(itemId);
+		model.addAttribute("msg", "삭제되었습니다");
 		return "ch14_3/success";
 	}
 }

@@ -5,50 +5,75 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<style type="text/css">
-span {
-	cursor: pointer;
-}
-</style>
 </head>
 <body>
-	<h2>Register</h2>
-	<form action="/item3/register" method="post" enctype="multipart/form-data" id="item3">
+	<h2>Modify</h2>
+	<form action="/item3/modify" method="post" enctype="multipart/form-data" id="item3">
+		<input type="hidden" name="itemId" value="${item.itemId}">
 		<table>
 			<tr>
 				<td>상품명</td>
 				<td>
-					<input type="text" name="itemName" id="itemName">
+					<input type="text" name="itemName" id="itemName" value="${item.itemName}">
 				</td>
-			</tr>		
+			</tr>
 			<tr>
 				<td>가격</td>
 				<td>
-					<input type="text" name="price" id="price">
+					<input type="text" name="price" id="price" value="${item.price}">
 				</td>
-			</tr>		
+			</tr>
 			<tr>
 				<td>사진</td>
 				<td>
-					<input type="file" id="inputFile" multiple="multiple">
+					<input type="file" id="inputFile">
 					<div class="uploadedList"></div>
 				</td>
 			</tr>
 			<tr>
 				<td>개요</td>
 				<td>
-					<textarea rows="10" cols="20" name="description"></textarea>
+					<textarea rows="10" cols="30" name="description">${item.description}</textarea>
 				</td>
-			</tr>		
+			</tr>
 		</table>
 		<div>
-			<button type="submit" id="btnRegister">등록</button>
-			<button type="button" id="btnList" onclick="javascript:location.href='/item3/list'">목록</button>
+			<button type="submit" id="btnModify">수정</button>
+			<button type="submit" id="btnList" onclick="javascript:location.href='/item3/list'">목록</button>
 		</div>
 	</form>
 </body>
 <script type="text/javascript">
 let inputFile = $('#inputFile');
+
+let itemId = ${item.itemId};
+console.log(itemId);
+
+$.getJSON("/item3/getAttach/" + itemId, function(list) {
+	$(list).each(function() {
+		console.log(this);
+		
+		var data = this;
+		
+		let str = "";
+		if(checkImageType(data)) {
+			str += "<div>";
+			str += "<a href='/item3/displayFile?fileName=" + data + "'>";
+			//str += "<img src='/item3/displayFile?fileName=" + getThumbnailName(data) + "'>";
+			str += "<img src='${pageContext.request.contextPath}/resources/upload" + getThumbnailName(data) + "'>";
+			str += "</a>";
+			str += "<span>X</span>";
+			str += "</div>";
+		} else {
+			str += "<div>";
+			str += "<a href='/item3/displayFile?fileName=" + data + "'>" + getOriginalName(data) + "</a>";
+			str += "<span>X</span>";
+			str += "</div>";
+		}
+		
+		$(".uploadedList").append(str);
+	});
+});
 
 $(".uploadedList").on("click", "span", function() {
 	$(this).parent("div").remove();
