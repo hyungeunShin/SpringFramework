@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.controller.ch13.web.TelegramSendController;
+import kr.or.ddit.mapper.LoginMapper;
 import kr.or.ddit.mapper.NoticeMapper;
+import kr.or.ddit.vo.DDITMemberVO;
 import kr.or.ddit.vo.NoticeVO;
 import kr.or.ddit.vo.PaginationInfoVO;
 
@@ -17,6 +19,9 @@ public class NoticeServiceImpl implements INoticeService {
 	
 	@Inject
 	private NoticeMapper noticeMapper;
+	
+	@Inject
+	private LoginMapper loginMapper;
 	
 	TelegramSendController tst = new TelegramSendController();
 	
@@ -79,5 +84,20 @@ public class NoticeServiceImpl implements INoticeService {
 	@Override
 	public List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO) {
 		return noticeMapper.selectNoticeList(pagingVO);
+	}
+
+	@Override
+	public ServiceResult idCheck(String memId) {
+		ServiceResult res = null;
+		
+		DDITMemberVO member = loginMapper.idCheck(memId);
+		
+		if(member != null) {
+			res = ServiceResult.EXIST;
+		} else {
+			res = ServiceResult.NOTEXIST;
+		}
+		
+		return res;
 	}
 }

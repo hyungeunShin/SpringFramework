@@ -62,9 +62,7 @@
 										<label for="memProfileImg" class="col-sm-2 col-form-label">프로필이미지</label>
 										<div class="row">
 											<a href="" target="_blank">
-												<img class="profile-user-img img-fluid img-circle" id="profileImg"
-													src="" alt="User profile picture"
-													style="width: 150px;">
+												<img class="profile-user-img img-fluid img-circle" id="profileImg" src="" alt="User profile picture" style="width: 150px;">
 											</a>
 										</div>
 									</div>

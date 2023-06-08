@@ -37,10 +37,10 @@
 				</div>
 			</form>
 			<p class="mb-1">
-				<a href="">아이디 & 비밀번호 찾기</a>
+				<a href="/notice/forget">아이디 & 비밀번호 찾기</a>
 			</p>
 			<p class="mb-0">
-				<a href="" class="text-center">회원가입</a>
+				<a href="/notice/signup" class="text-center">회원가입</a>
 			</p>
 		</div>
 	</div>

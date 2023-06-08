@@ -18,4 +18,6 @@ public interface INoticeService {
 	public int selectNoticeCount(PaginationInfoVO<NoticeVO> pagingVO);
 
 	public List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO);
+
+	public ServiceResult idCheck(String memId);
 }

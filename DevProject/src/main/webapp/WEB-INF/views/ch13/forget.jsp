@@ -65,7 +65,7 @@
 	<div class="card card-outline card-secondary">
 		<div class="card-header text-center">
 			<h4>MAIN MENU</h4>
-			<button type="button" class="btn btn-secondary btn-block" id="loginBtn">로그인</button>
+			<button type="button" class="btn btn-secondary btn-block" id="loginBtn" onclick="javascript:location.href='/notice/login'">로그인</button>
 		</div>
 	</div>
 </div>
