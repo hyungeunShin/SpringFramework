@@ -16,7 +16,7 @@
 				</div>
 				<div class="input-group mb-3">
 					<div class="custom-file">
-						<input type="file" class="custom-file-input" name="imgFile" id="imgFile" multiple="multiple"> 
+						<input type="file" class="custom-file-input" name="imgFile" id="imgFile"> 
 						<label class="custom-file-label" for="imgFile">프로필 이미지를 선택해주세요</label>
 					</div>
 				</div>
@@ -24,37 +24,37 @@
 					<label for="inputDescription">프로필 정보</label> 
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="memId" name="memId" placeholder="아이디를 입력해주세요"> 
+					<input type="text" class="form-control" id="memId" name="memId" value="${member.memId}" placeholder="아이디를 입력해주세요"> 
 					<span class="input-group-append">
 						<button type="button" class="btn btn-secondary btn-flat" id="idCheckBtn">중복확인</button>
 					</span>
-					<span class="error invalid-feedback" style="display:block;"></span>
+					<span class="error invalid-feedback" style="display:block;">${errors.memId}</span>
 				</div>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="memPw" name="memPw" placeholder="비밀번호를 입력해주세요">
-					<span class="error invalid-feedback" style="display:block;"></span>
+					<span class="error invalid-feedback" style="display:block;">${errors.memPw}</span>
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="memName" name="memName" placeholder="이름을 입력해주세요">
-					<span class="error invalid-feedback" style="display:block;"></span>
+					<input type="text" class="form-control" id="memName" name="memName" value="${member.memName}" placeholder="이름을 입력해주세요">
+					<span class="error invalid-feedback" style="display:block;">${errors.memName}</span>
 				</div>
 				<div class="input-group mb-3">
 					<div class="form-group clearfix">
 						<div class="icheck-primary d-inline">
 							<input type="radio" id="memGenderM" name="memGender" value="M" checked="checked">
-							<label for="radioPrimary1">남자</label>
+							<label for="memGenderM">남자</label>
 						</div>
 						<div class="icheck-primary d-inline">
 							<input type="radio" id="memGenderF" name="memGender" value="F">
-							<label for="radioPrimary2">여자</label>
+							<label for="memGenderF">여자</label>
 						</div>
 					</div>
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="memEmail" name="memEmail" placeholder="이메일을 입력해주세요">
+					<input type="text" class="form-control" id="memEmail" name="memEmail" value="${member.memEmail}" placeholder="이메일을 입력해주세요">
 				</div>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" id="memPhone" name="memPhone" placeholder="전화번호를 입력해주세요">
+					<input type="text" class="form-control" id="memPhone" name="memPhone" value="${member.memPhone}" placeholder="전화번호를 입력해주세요">
 				</div>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" id="memPostCode" name="memPostCode"> 
@@ -86,15 +86,18 @@
 	<div class="card card-outline card-secondary">
 		<div class="card-header text-center">
 			<h4>MAIN MENU</h4>
-			<button type="button" class="btn btn-secondary btn-block" onclick="javascript:location.href='/notice/login'">뒤로가기</button>
+			<button type="button" class="btn btn-secondary btn-block" onclick="javascript:location.href='/notice/login'" >뒤로가기</button>
 		</div>
 	</div>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-let imgFile = $("#imgFile"); //프로필 이미지
+let imgFile = $("#imgFile"); 
 let idCheckFlag = false;
+let signupBtn = $('#signupBtn');	
+let signupForm = $('#signupForm');	
+let btn = $("#idCheckBtn");
 
 imgFile.on("change", function(event) {
 	let file = event.target.files[0];
@@ -114,8 +117,6 @@ function isImageFile(file) {
 	let ext = file.name.split(".").pop().toLowerCase();
 	return ($.inArray(ext, ["jpg", "jpeg", "gif", "png"]) === -1) ? false : true;
 }
-
-let btn = $("#idCheckBtn");
 
 btn.on("click", function() {
 	let id = $("#memId").val();
@@ -185,4 +186,46 @@ function DaumPostcode() {
         }
     }).open();
 }
+
+$('#memId').on("change", function() {
+	idCheckFlag = false;
+});
+
+signupBtn.on('click', function(){
+	let memId = $('#memId').val();
+	let memPw = $('#memPw').val();
+	let memName = $('#memName').val();
+	let agreeFlag = false;	// 개인정보 동의 flag
+	
+	if(memId == null || memId == ""){
+		alert("아이디를 입력해주세요.");
+		return false;
+	}
+	
+	if(memPw == null || memPw == ""){
+		alert("비밀번호를 입력해주세요.");
+		return false;
+	}
+	
+	if(memName == null || memName == ""){
+		alert("이름을 입력해주세요.");
+		return false;
+	}
+	
+	// 개인정보 처리 방침을 동의하게되면 Y값이 넘어오므로, 동의 여부는 true로 설정한다.
+	let memAgree = $('#memAgree:checked').val();
+	if(memAgree == "Y"){
+		agreeFlag = true;
+	}
+	
+	if(agreeFlag){	
+		if(idCheckFlag){	
+			signupForm.submit();
+		} else {
+			alert("아이디 중복체크를 진행해주세요!");
+		}
+	} else {
+		alert("개인정보 동의를 체크해주세요!");
+	}
+})
 </script>

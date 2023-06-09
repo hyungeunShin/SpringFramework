@@ -1,24 +1,23 @@
 package kr.or.ddit.controller.ch13.web;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.controller.ch13.service.INoticeService;
+import kr.or.ddit.vo.DDITMemberVO;
 import kr.or.ddit.vo.NoticeVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +38,8 @@ public class NoticeInsertController {
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insert(NoticeVO notice, Model model) {
+	public String insert(NoticeVO notice, HttpServletRequest req, RedirectAttributes ra, Model model) {
+		log.info("");
 		String goPage = "";
 		Map<String, String> errors = new HashMap<>();
 		
@@ -55,53 +55,28 @@ public class NoticeInsertController {
 			model.addAttribute("notice", notice);
 			goPage = "notice/form";
 		} else {
-			notice.setBoWriter("a001"); 
-			ServiceResult result = noticeService.insertNotice(notice);
+			HttpSession session = req.getSession();
+			DDITMemberVO vo = (DDITMemberVO) session.getAttribute("SessionInfo");
 			
-			if(result.equals(ServiceResult.OK)) {
-				//성공했다는 메세지를 텔레그램 BOT API를 이용하여 처리
+			if(vo != null) {
+				notice.setBoWriter(vo.getMemId());
+				ServiceResult result = noticeService.insertNotice(req, notice);
 				
-				goPage = "redirect:/notice/detail?boNo=" + notice.getBoNo();
+				if(result.equals(ServiceResult.OK)) {
+					//성공했다는 메세지를 텔레그램 BOT API를 이용하여 처리
+					
+					goPage = "redirect:/notice/detail?boNo=" + notice.getBoNo();
+				} else {
+					model.addAttribute("message", "서버에러, 다시 시도해주세요");
+					model.addAttribute("notice", notice);
+					goPage = "notice/form";
+				}
 			} else {
-				model.addAttribute("message", "서버에러, 다시 시도해주세요");
-				model.addAttribute("notice", notice);
-				goPage = "notice/form";
+				ra.addFlashAttribute("message", "로그인 후에 사용 가능합니다");
+				goPage = "redirect:/notice/login";
 			}
 		}
 		
 		return goPage;
-	}
-	
-	// /notice/generalForm
-	@RequestMapping(value="/generalForm", method=RequestMethod.GET)
-	public String generalForm() {
-		return "notice/generalForm";
-	}
-	
-	@ResponseBody
-	@PostMapping("/generalFormPost")
-	public String generalFormPost(NoticeVO vo) {
-		log.info("vo : " + vo);
-		MultipartFile[] boFile = vo.getBoFile();
-		
-		for (MultipartFile file : boFile) {
-			log.info("============");
-			log.info("name : " + file.getOriginalFilename());
-			
-			File saveFile = new File(resourcesPath, file.getOriginalFilename());
-			
-			// 연월일 폴더
-			//UUID
-			
-			try {
-				//파일복사
-				file.transferTo(saveFile);
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-				return "";
-			}
-		}
-		
-		return "";
 	}
 }

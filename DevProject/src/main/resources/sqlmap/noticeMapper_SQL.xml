@@ -30,7 +30,7 @@
 	
 	<select id="selectNotice" parameterType="int" resultType="noticeVO">
 		select 
-			bo_no, bo_title, bo_content, bo_writer, to_char(bo_date, 'yyyy-mm-dd hh24:mi'), bo_hit
+			bo_no, bo_title, bo_content, bo_writer, to_char(bo_date, 'yyyy-mm-dd hh24:mi') bo_date, bo_hit
 		  from notice
 		 where bo_no = #{boNo}
 	</select>
@@ -71,4 +71,12 @@
 		 	where b.rnum >= #{startRow} and b.rnum <= #{endRow}
 		 ]]>
 	</select>
+	
+	<insert id="insertNoticeFile" parameterType="noticefileVO">
+		insert into noticefile(
+			file_no, bo_no, file_name, file_size, file_fancysize, file_mime, file_savepath, file_downcount
+		) values (
+			seq_noticefile.nextval, #{boNo}, #{fileName}, #{fileSize}, #{fileFancysize}, #{fileMime}, #{fileSavepath}, 0
+		)
+	</insert>
 </mapper>

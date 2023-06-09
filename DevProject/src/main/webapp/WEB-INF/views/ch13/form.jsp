@@ -24,7 +24,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-primary">
-				<form action="/notice/insert" method="post" id="noticeForm">
+				<form action="/notice/insert" method="post" id="noticeForm" enctype="multipart/form-data">
 					<c:if test="${status eq 'u'}">
 						<input type="hidden" name="boNo" id="boNo" value="${notice.boNo}">
 					</c:if>
@@ -44,8 +44,8 @@
 						<div class="form-group">
 							<div class="custom-file">
 								<label for="inputDescription">파일 선택</label>
-								<input type="file" class="custom-file-input" id="customFile">
-								<label class="custom-file-label" for="customFile">파일을 선택해주세요</label>
+								<input type="file" class="custom-file-input" id="boFile" name="boFile" multiple="multiple">
+								<label class="custom-file-label" for="boFile">파일을 선택해주세요</label>
 							</div>
 						</div>
 					</div>
