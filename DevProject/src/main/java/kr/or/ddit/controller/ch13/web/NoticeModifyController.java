@@ -1,6 +1,7 @@
 package kr.or.ddit.controller.ch13.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +30,9 @@ public class NoticeModifyController {
 	}
 	
 	@PostMapping("/update")
-	public String modify(NoticeVO notice, Model model) {
+	public String modify(NoticeVO notice, HttpServletRequest req, Model model) {
 		String goPage = "";
-		ServiceResult result = noticeService.updateNotice(notice);
+		ServiceResult result = noticeService.updateNotice(req, notice);
 		
 		if(result.equals(ServiceResult.OK)) {
 			goPage = "redirect:/notice/detail?boNo=" + notice.getBoNo();
@@ -46,10 +47,10 @@ public class NoticeModifyController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String delete(int boNo, Model model) {
+	public String delete(int boNo, HttpServletRequest req, Model model) {
 		String goPage = "";
 		
-		ServiceResult result = noticeService.deleteNotice(boNo);
+		ServiceResult result = noticeService.deleteNotice(req, boNo);
 		
 		if(result.equals(ServiceResult.OK)) {
 			goPage = "redirect:/notice/list";

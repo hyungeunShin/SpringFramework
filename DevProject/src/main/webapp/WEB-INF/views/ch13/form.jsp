@@ -49,78 +49,33 @@
 							</div>
 						</div>
 					</div>
-					<div class="card-footer bg-white">
-						<ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-							<li>
-								<span class="mailbox-attachment-icon">
-									<i class="far fa-file-pdf"></i>
-								</span>
-	
-								<div class="mailbox-attachment-info">
-									<a href="#" class="mailbox-attachment-name">
-										<i class="fas fa-paperclip"></i> Sep2014-report.pdf
-									</a>
-									<span class="mailbox-attachment-size clearfix mt-1">
-										<span>1,245	KB</span>
-										<a href="#" class="btn btn-default btn-sm float-right">
-											<i class="fas fa-times"></i>
-										</a>
-									</span>
-								</div>
-							</li>
-							<li>
-								<span class="mailbox-attachment-icon">
-									<i class="far fa-file-word"></i>
-								</span>
-	
-								<div class="mailbox-attachment-info">
-									<a href="#" class="mailbox-attachment-name">
-										<i class="fas fa-paperclip"></i> App Description.docx
-									</a>
-									<span class="mailbox-attachment-size clearfix mt-1">
-										<span>1,245	KB</span>
-										<a href="#" class="btn btn-default btn-sm float-right">
-											<i class="fas fa-times"></i>
-										</a>
-									</span>
-								</div>
-							</li>
-							<li>
-								<span class="mailbox-attachment-icon has-img">
-									<img src="../../dist/img/photo1.png" alt="Attachment">
-								</span>
-	
-								<div class="mailbox-attachment-info">
-									<a href="#" class="mailbox-attachment-name">
-										<i class="fas fa-camera"></i> photo1.png
-									</a>
-									<span class="mailbox-attachment-size clearfix mt-1">
-										<span>2.67 MB</span>
-										<a href="#" class="btn btn-default btn-sm float-right">
-											<i class="fas fa-times"></i>
-										</a>
-									</span>
-								</div>
-							</li>
-							<li>
-								<span class="mailbox-attachment-icon has-img">
-									<img src="../../dist/img/photo2.png" alt="Attachment">
-								</span>
-	
-								<div class="mailbox-attachment-info">
-									<a href="#" class="mailbox-attachment-name">
-										<i class="fas fa-camera"></i> photo2.png
-									</a>
-									<span class="mailbox-attachment-size clearfix mt-1">
-										<span>1.9 MB</span>
-										<a href="#" class="btn btn-default btn-sm float-right">
-											<i class="fas fa-times"></i>
-										</a>
-									</span>
-								</div>
-							</li>
-						</ul>
-					</div>
+					<c:if test="${status eq 'u'}">
+						<div class="card-footer bg-white">
+							<ul class="mailbox-attachments d-flex align-items-stretch clearfix">
+								<c:if test="${not empty notice.noticeFileList}">
+									<c:forEach items="${notice.noticeFileList}" var="file">
+										<li>
+											<span class="mailbox-attachment-icon">
+												<i class="far fa-file-pdf"></i>
+											</span>
+				
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name">
+													<i class="fas fa-paperclip"></i> ${file.fileName}
+												</a>
+												<span class="mailbox-attachment-size clearfix mt-1">
+													<span>${file.fileFancysize}</span>
+													<span class="btn btn-default btn-sm float-right attachmentFileDel" data-fileno="${file.fileNo}">
+														<i class="fas fa-times"></i>
+													</span>
+												</span>
+											</div>
+										</li>
+									</c:forEach>
+								</c:if>
+							</ul>
+						</div>
+					</c:if>
 					<div class="card-footer bg-white">
 						<div class="row">
 							<div class="col-12">
@@ -179,5 +134,13 @@ insertBtn.on("click", function() {
 cancelBtn.on("click", function() {
 	let boNo = $("#boNo").val();
 	location.href = "/notice/detail?boNo=" + boNo;
+});
+
+$(".attachmentFileDel").on("click", function() {
+	let no = $(this).data("fileno");
+	
+	let str = "<input type='hidden' name='delNoticeNo' value='%V'>";
+	form.append(str.replace("%V", no));
+	$(this).parents("li:first").hide();
 });
 </script>

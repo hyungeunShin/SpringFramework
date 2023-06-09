@@ -20,7 +20,7 @@
 				<img src="${sessionScope.SessionInfo.memProfileImg}" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="/notice/profile.do" class="d-block">${sessionScope.SessionInfo.memName}</a>
+				<a href="/notice/profile" class="d-block">${sessionScope.SessionInfo.memName}</a>
 			</div>
 		</div>
 		<nav class="mt-2">

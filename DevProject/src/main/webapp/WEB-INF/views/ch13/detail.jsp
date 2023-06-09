@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -28,24 +29,31 @@
 						<div class="card-body">${notice.boContent}</div>
 						<div class="card-footer bg-white">
 							<ul	class="mailbox-attachments d-flex align-items-stretch clearfix">
-								<li>
-									<span class="mailbox-attachment-icon">
-										<i class="far fa-file-pdf"></i>
-									</span>
-									<div class="mailbox-attachment-info">
-										<a href="#" class="mailbox-attachment-name">
-											<i class="fas fa-paperclip"></i> 파일명
-										</a>
-										<span class="mailbox-attachment-size clearfix mt-1">
-											<span>파일 Fancy사이즈 KB</span>
-											<a href="다운로드 url">
-												<span class="btn btn-default btn-sm float-right">
-													<i class="fas fa-download"></i>
+								<c:if test="${not empty notice.noticeFileList}">
+									<c:forEach items="${notice.noticeFileList}" var="file" varStatus="vs">
+										<li>
+											<span class="mailbox-attachment-icon">
+												<i class="far fa-file-pdf"></i>
+											</span>
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name">
+													<i class="fas fa-paperclip"></i> ${file.fileName}
+												</a>
+												<span class="mailbox-attachment-size clearfix mt-1">
+													<span>${file.fileFancysize}</span>
+													<c:url value="/notice/download" var="downloadURL">
+														<c:param name="fileNo" value="${file.fileNo}"></c:param>
+													</c:url>
+													<a href="${downloadURL}">
+														<span class="btn btn-default btn-sm float-right">
+															<i class="fas fa-download"></i>
+														</span>
+													</a>
 												</span>
-											</a>
-										</span>
-									</div>
-								</li>
+											</div>
+										</li>
+									</c:forEach>
+								</c:if>
 							</ul>
 						</div>
 						<div class="card-footer">
