@@ -45,8 +45,5 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.or.ddit" />
-	
-	
-	
+	<context:component-scan base-package="kr.or.ddit.controller" />
 </beans:beans>

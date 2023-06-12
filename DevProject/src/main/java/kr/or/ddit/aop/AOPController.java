@@ -3,6 +3,11 @@ package kr.or.ddit.aop;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -166,11 +171,90 @@ public class AOPController {
 	
 	@Before("execution(* kr.or.ddit.service.IBoardService.*(..))")
 	public void startLog(JoinPoint jp) {
-		log.info("[@Before] startLog : " + jp.getSignature());
+		log.info("[@Before] 메소드명 : " + jp.getSignature());
 		//getSignature() : 어떤 클래스의 어떤 메소드가 실행되었는지를 보여준다
 		//파라미터 타입은 무엇인지 보여준다
-		log.info("[@Before] startLog : " + Arrays.toString(jp.getArgs()));
+		log.info("[@Before] 파라미터 : " + Arrays.toString(jp.getArgs()));
 		//getArgs() : 전달 된 파라미터 정보를 보여준다
 		//ex) [BoardVO [boardNo=127, title=제목]]
+		
+		//8
+		//프록시가 입혀지기전의 원본대상 객체
+		Object targetObj = jp.getTarget();
+		log.info("targetObj : " + targetObj);
+		
+		//프록시를 가져온다
+		Object thisObject = jp.getThis();
+		log.info("thisObject : " + thisObject);
+		
+		//파라미터를 가져온다
+		Object[] args = jp.getArgs();
+		log.info("args.length : " + args.length);
 	}
+	
+	/*
+	 * 	4. After Returning 어드바이스
+	 * 	- 조인 포인트가 정상적으로 종료한 후에 실행된다. 예외가 발생하면 실행되지 않는다
+	 */
+	
+	@AfterReturning("execution(* kr.or.ddit.service.IBoardService.*(..))")
+	public void logReturning(JoinPoint jp) {
+		log.info("[@AfterReturning] 메소드명 : " + jp.getSignature());
+	}
+	
+	/*
+	 * 	5. AfterThrowing 어드바이스
+	 * 	- 조인포인트에서 예외가 발생했을때 실행. 예외가 발생하지 않고 정상적으로 종료되면 실행되지 않는다
+	 * 	delete부분을 에러로 변경
+	 */
+	
+	@AfterThrowing(pointcut = "execution(* kr.or.ddit.service.IBoardService.*(..))", throwing = "e")
+	public void logThrowing(JoinPoint jp, Exception e) {
+		log.info("[@AfterThrowing] 메소드명 : " + jp.getSignature());
+		log.info("[@AfterThrowing] Exception : " + e);
+	}
+	
+	/*
+	 * 	6. After 어드바이스
+	 * 	- 조인 포인트에서 처리가 완료된 후 실행
+	 */
+	
+	@After("execution(* kr.or.ddit.service.IBoardService.*(..))")
+	public void logEnd(JoinPoint jp) {
+		log.info("[@After] 메소드명 : " + jp.getSignature());
+		log.info("[@After] 파라미터 : " + Arrays.toString(jp.getArgs()));
+	}
+	
+	/*
+	 * 	7. Around 어드바이스
+	 * 	- 조인 포인트 전 후에 실행
+	 * 	- 제일 많이 사용됨
+	 * 
+	 * 	ProceedingJoinPoint : around 어드바이스에서 사용
+	 * 	
+	 * 	스프링 프레임워크가 컨트롤 하고 있는 비즈니스 로직 호출을 가로챈다
+	 * 	책임이 around 어드바이스로 전가되고 그래서 비즈니스 로직에 대한 정보를 around 어드바이스 메소드가 가지고 있어야하고
+	 * 	그 정보를 스프링 컨테이너가 around 어드바이스 메소드로 넘겨주면 ProceedingJoinPoint 객체로 받아서 around 어드바이스가 컨트롤 시 활용
+	 */
+	
+	@Around("execution(* kr.or.ddit.service.IBoardService.*(..))")
+	public Object timeLog(ProceedingJoinPoint pjp) throws Throwable {
+		long startTime = System.currentTimeMillis();
+		log.info("[@Around] start : " + Arrays.toString(pjp.getArgs()));
+		
+		Object result = pjp.proceed();
+		
+		long endTime = System.currentTimeMillis();
+		log.info("[@Around] end : " + Arrays.toString(pjp.getArgs()));
+		
+		log.info("[@Around] : " + pjp.getSignature().getName() + "  메소드 실행 시간 : " + ((endTime-startTime)/1000));
+		
+		return result;
+	}
+	
+	/*
+	 * 	8. 메소드 정보 획득
+	 * 	- @Before 어노테이션 붙은 메소드는 JoinPoint 라는 매개변수를 통해 실행 중인 메소드의 정보를 구할 수 있다
+	 * 	- @Before 어드바이스에서 진행
+	 */
 }
