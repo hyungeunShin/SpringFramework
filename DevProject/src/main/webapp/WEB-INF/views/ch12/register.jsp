@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h2>Register</h2>
-	<form:form modelAttribute="board" method="post" action="/crud/board/register">
+	<form method="post" action="/crud/board/register" id="board">
 		<c:if test="${status eq 'u'}">
 			<input type="hidden" name="boardNo" value="${board.boardNo}">
 		</c:if>
@@ -18,22 +18,22 @@
 			<tr>
 				<td>제목</td>
 				<td>
-					<!-- <input type="text" id="title" name="title" value=""> -->
-					<form:input path="title"/> 
+					<input type="text" id="title" name="title2" value="${board.title}">
+					<%-- <form:input path="title"/> --%> 
 				</td>
 			</tr>
 			<tr>
 				<td>작성자</td>
 				<td>
-					<!-- <input type="text" id="writer" name="writer" value=""> -->
-					<form:input path="writer"/>
+					<input type="text" id="writer" name="writer" value="${board.writer}">
+					<%-- <form:input path="writer"/> --%>
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-					<!-- <textarea rows="10" cols="30" name="content" id="content"></textarea> -->
-					<form:textarea path="content" rows="10" cols="30" /> 
+					<textarea rows="10" cols="30" name="content" id="content">${board.content}</textarea>
+					<%-- <form:textarea path="content" rows="10" cols="30" />  --%>
 				</td>
 			</tr>
 		</table>
@@ -45,7 +45,7 @@
 			<input type="button" id="btnRegister" value="${text}">
 			<input type="button" id="btnList" value="목록">
 		</div>
-	</form:form>
+	</form>
 </body>
 <script type="text/javascript">
 let board = $("#board");
@@ -59,14 +59,16 @@ btnRegister.on("click", function() {
 	let content = $("#content").val();
 	let writer = $("#writer").val();
 	
-	if(title == null || title == "") {
+	/* if(title == null || title == "") {
 		alert("제목을 입력해주세요.");
 		return false;
-	}
+	} */
+	
 	if(content == null || content == "") {
 		alert("내용을 입력해주세요.");
 		return false;
 	}
+	
 	if(writer == null || writer == "") {
 		alert("작성자를 입력해주세요.");
 		return false;
