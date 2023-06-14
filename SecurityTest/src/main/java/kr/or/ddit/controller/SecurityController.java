@@ -1,5 +1,7 @@
 package kr.or.ddit.controller;
 
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
 public class SecurityController {
 	/*
 	 * 스프링 시큐리티
@@ -184,6 +186,25 @@ public class SecurityController {
 	 * 		*** 시큐리티에서 제공하는 기본 로그인 페이지로 이동하지 않고, 사용자가 정의한 로그인 페이지의 URI를 요청하여 해당 페이지에서 권한을 체크하도록한다
 	 * 		인증이 완료되면 최초의 요청된 target URI로 이동. 그렇지 않으면 사용자가 만들어놓은 접근 거부 페이지로 이동
 	 * 		
-	 * 		
+	 * 8. 로그인 성공 처리
+	 * - 로그인을 성공한 후에 로그인 이력 로그를 기록하는 등의 동작을 하고 싶은 경우가 있다
+	 * 이런 경우에 AuthenticationSuccessHandler라는 인터페이스를 구현해서 로그인 성공 처리자로 지정할 수 있다
+	 * 
+	 * 		환경 설정
+	 * 		- 스프링 시큐리티 설정
+	 * 			> security-context.xml
+	 * 				customLoginSuccess 빈 등록
+	 * 				<security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccess" />
+	 * 
+	 * 		로그인 성공 처리자 클래스 정의
+	 * 		- SavedRequestAwareAuthenticationSuccessHandler는 AuthenticationSuccessHandler의 구현 클래스
+	 * 		인증 전에 접근을 시도한 URL로 리다이렉트 하는 기능을 가지고 있으며 스프링 시큐리티에서 기본적으로 사용되는 구현 클래스
+	 * 
+	 * 		화면 설명
+	 * 		- 일반게시판 등록 화면
+	 * 			> 사용자가 정의한 로그인 페이지에서 회원 권한에 해당하는 계정으로 로그인 시, 성공했다면 성공 처리자인 CustomLoginSuccess 클래스로 넘어가
+	 * 			넘겨받은 파라미터들 중 authentication 안에 principal로 user 정보를 받아서 username과 password를 출력
+	 * 			(출력 정보는 로그인 성공 시 인증된 회원정보)
+	 * 				
 	 */
 }
