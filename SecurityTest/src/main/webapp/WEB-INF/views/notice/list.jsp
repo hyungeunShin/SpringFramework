@@ -7,5 +7,6 @@
 </head>
 <body>
 	<h2>Notice List : access to all</h2>
+	<a href="/notice/register">등록</a>
 </body>
 </html>
