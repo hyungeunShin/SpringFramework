@@ -304,5 +304,39 @@ public class SecurityController {
 	 * 		- 표현식을 이용하여 동적 화면 구성
 	 * 		- home.jsp 수정
 	 * 		- 로그인 한 사용자 정보 보여주기
+	 * 
+	 * 14. 자동 로그인
+	 * - 로그인 하면 특정 시간 동안 다시 로그인 할 필요가 없는 기능
+	 * 스프링 시큐리티는 메모리나 데이터베이스를 사용하여 처리
+	 * 기능을 구현하기 위해 <security:remember-me> 태그를 이용하여 시큐리티 설정 파일을 수정한다
+	 * 
+	 * 		데이터베이스 테이블
+	 * 		- persistent_logins 테이블 준비
+	 * 		
+	 * 		환경설정
+	 * 		- 스프링 시큐리티 설정
+	 * 		> security-context.xml 설정
+	 * 		> <security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+	 * 		> <security:logout logout-url:"/logout" invalidate-session="true" delete-cookies="JSESSION_ID, remember-me" />
+	 * 	
+	 * 		자동 로그인
+	 * 		- 로그인 상태 유지 체크박스 추가
+	 * 		> loginfForm.jsp 수정
+	 * 
+	 * 		# 자동 로그인 시, 만들어지는 쿠키 정보들
+	 * 		- JSESSIONID와 remember-me 쿠키가 생성됨
+	 * 		- JSESSIONID를 삭제 후, 다시 로그인을 진행하더라도 로그인 후 진행될 페이지가 정상적으로 나타난다
+	 * 			> 자동 로그인이 remember-me에 의해 실행됨을 확인할 수 있다
+	 * 
+	 * 15. 스프링 시큐리티 어노테이션
+	 * - 스프링 시큐리티는 어노테이션을 사용하여 필요한 설정을 추가할 수 있다
+	 * 	
+	 * 		사용 어노테이션
+	 * 		- @Secured
+	 * 			> 스프링 시큐리티 모듈을 지원하기 위한 어노테이션으로 초기부터 사용되었다
+	 * 		- @PreAuthorize
+	 * 			> 메소드가 실행되기 전에 적용할 접근 정책을 지정할 때 사용한다
+	 * 		- @PostAuthorize
+	 * 			> 메소드가 실행한 후에 적용할 접근 정책을 지정할 때 사용한다
 	 */
 }
