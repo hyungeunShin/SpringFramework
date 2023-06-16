@@ -12,4 +12,8 @@ public interface LoginMapper {
 	public String idForget(DDITMemberVO vo);
 
 	public String pwForget(DDITMemberVO vo);
+
+	public DDITMemberVO readByUserId(String username);
+
+	public void signupAuth(int memNo);
 }

@@ -97,6 +97,9 @@ idFindBtn.on("click", function() {
 		type: "post",
 		url: "/notice/idForget",
 		contentType : "application/json",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		},
 		data: JSON.stringify(data),
 		//data: data,
 		success: function(res) {
@@ -135,6 +138,9 @@ pwFindBtn.on("click", function() {
 		type: "post",
 		url: "/notice/pwForget",
 		contentType: "application/json",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		},
 		data: JSON.stringify(data),
 		success: function(res) {
 			$("#password").html(res);	

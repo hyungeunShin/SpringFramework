@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <section class="content-header">
 	<c:set value="등록" var="name" />
 	<c:if test="${status eq 'u'}">
@@ -25,6 +26,8 @@
 		<div class="col-md-12">
 			<div class="card card-primary">
 				<form action="/notice/insert" method="post" id="noticeForm" enctype="multipart/form-data">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					
 					<c:if test="${status eq 'u'}">
 						<input type="hidden" name="boNo" id="boNo" value="${notice.boNo}">
 					</c:if>
@@ -98,7 +101,7 @@
 <script>
 CKEDITOR.replace("boContent", {
 	footnotesPrefix: "a",
-	filebrowserUploadUrl: '/imageUpload'
+	filebrowserUploadUrl: '/imageUpload?${_csrf.parameterName}=${_csrf.token}'
 });
 
 let listBtn = $("#listBtn");

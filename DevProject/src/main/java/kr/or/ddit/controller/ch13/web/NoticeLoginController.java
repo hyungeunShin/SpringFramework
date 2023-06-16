@@ -60,8 +60,7 @@ public class NoticeLoginController {
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(DDITMemberVO memberVO, Model model, HttpServletRequest req,
-							RedirectAttributes ra) {
+	public String signup(DDITMemberVO memberVO, Model model, HttpServletRequest req, RedirectAttributes ra) {
 		String goPage = "";
 		
 		Map<String, String> errors = new HashMap<String, String>();
@@ -97,6 +96,11 @@ public class NoticeLoginController {
 	
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String loginCheck(DDITMemberVO memberVO, Model model, HttpServletRequest req) {
+		log.info("loginCheck() 실행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		log.info("loginCheck() 실행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		log.info("loginCheck() 실행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		log.info("loginCheck() 실행@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
 		String goPage = "";
 		
 		Map<String, String> errors = new HashMap<String, String>();

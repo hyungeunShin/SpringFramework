@@ -7,7 +7,10 @@
 		<div class="card-body">
 			<p class="login-box-msg">회원가입</p>
 			
+			<!-- 이미지가 있으면 action 경로에 추가해야함 -->
+			<%-- /notice/signup?${_csrf.parameterName}=${_csrf.token} --%>
 			<form action="/notice/signup" method="post" id="signupForm" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<div class="input-group mb-3 text-center">
 					<img class="profile-user-img img-fluid img-circle" id="profileImg" src="/resources/dist/img/AdminLTELogo.png" alt="User profile picture" style="width: 150px;">
 				</div>
@@ -126,9 +129,13 @@ btn.on("click", function() {
 		return false;
 	}
 	
+	//security를 적용한 상태에서 data를 보내려고 하면 토큰이 필요하다
 	$.ajax({
 		type: "post",
 		url: "/notice/idCheck",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		},
 		data: {memId : id},
 		success: function(res) {
 			console.log(res);

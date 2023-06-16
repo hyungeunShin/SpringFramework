@@ -40,7 +40,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate);
 		
-		return "ch04/home";
+		return "redirect:/notice/list";
 	}
 	
 	/*
