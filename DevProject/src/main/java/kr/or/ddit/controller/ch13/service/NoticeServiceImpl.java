@@ -287,8 +287,8 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	@Override
-	public DDITMemberVO selectMember(DDITMemberVO vo) {
-		return profileMapper.selectMember(vo);
+	public DDITMemberVO selectMember(String memId) {
+		return profileMapper.selectMember(memId);
 	}
 
 	@Override

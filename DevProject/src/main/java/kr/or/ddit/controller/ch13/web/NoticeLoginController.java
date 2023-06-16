@@ -132,7 +132,6 @@ public class NoticeLoginController {
 		return goPage;
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping(value="/idForget", method=RequestMethod.POST)
 	public ResponseEntity<String> idForget(@RequestBody DDITMemberVO vo) {

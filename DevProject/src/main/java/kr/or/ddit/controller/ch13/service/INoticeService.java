@@ -35,7 +35,7 @@ public interface INoticeService {
 
 	public NoticeFileVO noticeDownload(int fileNo);
 
-	public DDITMemberVO selectMember(DDITMemberVO vo);
+	public DDITMemberVO selectMember(String memid);
 
 	public ServiceResult profileUpdate(HttpServletRequest req, DDITMemberVO vo);
 }

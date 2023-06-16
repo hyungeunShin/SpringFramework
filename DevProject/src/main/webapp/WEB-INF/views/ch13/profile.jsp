@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
@@ -58,6 +59,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="settings">
 								<form class="form-horizontal" action="/notice/profileupdate" method="post" id="profileUdtForm" enctype="multipart/form-data">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<input type="hidden" name="memNo" value="${member.memNo}">
 									<div class="form-group row">
 										<label for="memProfileImg" class="col-sm-2 col-form-label">프로필이미지</label>

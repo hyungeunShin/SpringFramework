@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,11 +57,12 @@ public class NoticeInsertController {
 			model.addAttribute("notice", notice);
 			goPage = "notice/form";
 		} else {
-			HttpSession session = req.getSession();
-			DDITMemberVO vo = (DDITMemberVO) session.getAttribute("SessionInfo");
+			//HttpSession session = req.getSession();
+			//DDITMemberVO vo = (DDITMemberVO) session.getAttribute("SessionInfo");
 			
-			if(vo != null) {
-				notice.setBoWriter(vo.getMemId());
+			//if(vo != null) {
+				User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				notice.setBoWriter(user.getUsername());
 				ServiceResult result = noticeService.insertNotice(req, notice);
 				
 				if(result.equals(ServiceResult.OK)) {
@@ -71,11 +74,11 @@ public class NoticeInsertController {
 					model.addAttribute("notice", notice);
 					goPage = "notice/form";
 				}
-			} else {
-				ra.addFlashAttribute("message", "로그인 후에 사용 가능합니다");
-				goPage = "redirect:/notice/login";
+			//} else {
+				//ra.addFlashAttribute("message", "로그인 후에 사용 가능합니다");
+				//goPage = "redirect:/notice/login";
 			}
-		}
+		//}
 		
 		return goPage;
 	}

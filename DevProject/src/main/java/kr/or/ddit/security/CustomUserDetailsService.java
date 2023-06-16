@@ -26,16 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		String password = "pwd1";
-		
-		//인코딩된 암호화 비밀번호
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		log.info("#### 인코딩된 비밀번호 확인 #### : " + pe.encode(password));
-		
 		//username은 사용자 !아이디! 이다
 		//member를 가지고 최종 리턴해서 넘겨야할 UserDetails를 만든다
 		log.info("load User by username : " + username);
